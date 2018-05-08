@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="../assets/js/vue.js"></script>
+		<title>Vue.directive自定义指令</title>
+	</head>
+	<body>
+		<h1>Vue.directive自定义指令</h1>
+		<div id="app">
+			<div v-yy="color">使用Vue.directive定义新的指令v-yy: 使字体颜色改变{{color}}</div>
+			<div v-live="color">自定义指令的生命周期{{color}}</div>
+			<div>
+				<input type="text" v-model="color">
+			</div>
+			<button onclick="unbind()">解绑指令</button>
+		</div>
+
+		<script type="text/javascript">
+			function unbind(){
+				app.$destroy();
+			}
+			Vue.directive('yy',function(el,binding,vnode){
+				// console.log(el);
+				// console.log(binding.name);
+				// console.log(binding.value);
+				// console.log(binding.expression);
+				el.style = 'color:' + binding.value;
+			});
+
+			Vue.directive('live',{
+				bind: function(el,binding,vnode){
+					console.log('1 - bind 被绑定');
+					el.style = 'color:' + binding.value;
+				},
+				inserted: function(){
+					console.log('2 - inserted 绑定到结点')
+				},
+				update: function(){
+					console.log('3 - update 组件更新');
+				},
+				componentUpdated: function(){
+					console.log('4 - componentUpdate 组件更新完成');
+				},
+				unbind: function(){
+					console.log('5 - unbind 指令解绑');
+				}
+			});
+			var app = new Vue({
+				el: '#app',
+				data: {
+					color: 'green'
+				}
+			});
+		</script>
+	</body>
+</html>

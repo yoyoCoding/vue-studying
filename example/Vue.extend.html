@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="../assets/js/vue.js"></script>
+		<title>Vue.extend扩展实例构造器</title>
+	</head>
+	<body>
+		<h1>Vue.extend扩展实例构造器</h1>
+		
+		<author></author>
+		<div id="author"></div>
+	
+		<script type="text/javascript">
+			var authorExtend = Vue.extend({
+				template: '<a :href="authorUrl" target="_blank">{{authorName}}</a>',
+				data: function(){
+					return{
+						authorName: 'yyy',
+						authorUrl: 'https://github.com/yoyoCoding'
+					}
+				}
+			});
+
+			new authorExtend().$mount('author');
+			new authorExtend().$mount('#author');
+
+		</script>
+	</body>
+</html>

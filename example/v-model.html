@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="../assets/js/vue.js"></script>
+		<title>v-model实例</title>
+	</head>
+	<body>
+		<h3>v-model指令</h3>
+
+		<div id="app">
+			<p>原始文本信息：{{message}}</p>
+			<p>原始文本信息.lazy：{{message2}}</p>
+			<p>原始文本信息.number：{{message3}}</p>
+			<p>原始文本信息.trim：{{message4}}</p>
+			<h5>文本框</h5>
+			<p>
+				v-model:
+				<input type="text" v-model="message">
+			</p>
+			<p>
+				v-model:
+				<input type="text" v-model.lazy="message2">
+			</p>
+			<p>
+				v-model:
+				<input type="text" v-model.number="message3">
+			</p>
+			<p>
+				v-model:
+				<input type="text" v-model.trim="message4">
+			</p>
+
+			<h5>文本域</h5>
+			<p>
+				v-model:
+				<textarea cols="30" rows="5" v-model="message"></textarea>
+			</p>
+
+			<h5>多选框[选定一个值]</h5>
+			<p>
+				v-model:
+				<input type="checkbox" id="check-box" v-model="isTrue">
+				<label for="check-box">{{isTrue}}</label>
+			</p>
+
+			<h5>多选框[选定数组]</h5>
+			<p>
+				v-model:
+				<input type="checkbox" id="box" value="yyy" v-model="names">
+				<label for="box">yyy</label>
+				<input type="checkbox" id="box2" value="yoyo" v-model="names">
+				<label for="box2">yoyo</label>
+				<input type="checkbox" id="box3" value="bb" v-model="names">
+				<label for="box3">bb</label>
+				<p>{{names}}</p>
+			</p>
+
+			<h5>单选框</h5>
+			<p>
+				v-model:
+				<input type="radio" name="gender" value="男" v-model="gender">
+				<label for="gender">男</label>
+				<input type="radio" name="gender" value="女" v-model="gender">
+				<label for="gender">女</label>
+				<p>您选择的性别是：{{gender}}</p>
+			</p>
+		</div>
+
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'hello world',
+					message2: '',
+					message3: '',
+					message4: '',
+					isTrue: true,
+					names: [],
+					gender: ''
+				}
+			});
+		</script>
+	</body>
+</html>

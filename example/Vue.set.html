@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="../assets/js/vue.js"></script>
+		<title>Vue.set全局操作</title>
+	</head>
+	<body>
+		<h1>Vue.set全局操作</h1>
+		
+		<div id="app">
+			<p>{{count}}</p>
+			<p>
+				<button @click="add">add</button>
+			</p>
+			<ul>
+				<li v-for="item in arr">{{item}}</li>
+			</ul>
+		</div>
+
+		<div class="outer">
+			<p>
+				<button onclick="add()">addOut</button>
+			</p>
+		</div>
+		
+	
+		<script type="text/javascript">
+
+			var outData = {
+				count: 1,
+				arr: ['aaa','bbb','ccc']
+			};
+
+			function add(){
+				// outData.count++;
+				// app.count++; 
+				// Vue.set(outData,'count',4);
+				// console.log(outData.count +'|'+ 'app.count is:' +app.count);
+
+				// outData.arr[0] = '233'; //注释掉count++的代码,此处代码无效
+				// app.arr[0] = '233'; //注释掉count++的代码,此处代码无效
+				Vue.set(outData.arr,'0','233'); //有效
+			}
+			
+			var app = new Vue({
+				el: '#app',
+				data: outData,
+				methods: {
+					add: function(){
+						// this.count++;
+						// this.arr['0'] = '233'; //注释掉count++代码,此处代码无效
+						// outData.arr[0] = '233'; //无效
+						Vue.set(this.arr,'0','233'); //有效
+					}
+				}
+			});
+
+		</script>
+	</body>
+</html>

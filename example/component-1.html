@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="../assets/js/vue.js"></script>
+		<title>component-1</title>
+	</head>
+	<body>
+		<h1>component-1</h1>
+
+		<div id="app">
+			<yoyo></yoyo>
+			<yyy from-here="china" :here="message"></yyy>
+			<yyy2></yyy2>	
+			<parentcom></parentcom>
+		</div>
+		
+		<hr>
+		<div id="app2">
+			<yoyo></yoyo>
+			<!-- yyy标签非全局注册,因此在注册它的构造器之外无法引用 -->
+			<!-- <yyy></yyy> -->
+		</div>
+
+		<script type="text/javascript">
+
+			Vue.component('yoyo',{
+				template: `<div style="color:red;">全局化注册的yoyo标签</div>`
+			});
+
+			var yyy2 = {
+				template: '<div style="color:pink;">局部注册的yyy标签(构造器外定义)</div>'
+			};
+
+			var childcom = {
+				template: `<div style="font-size:13px">我是子组件</div>`
+			}
+			var parentcom = {
+				template: `<div><p>我是父组件</p><childcom></childcom></div>`,
+				components: {
+					'childcom': childcom
+				}
+			}
+
+			var app = new Vue({
+				el: '#app',
+				data: {
+					message: 'guangdong',
+				},
+				components: {
+					'yyy': {
+						template: `<div style="color:green;">局部注册的yyy标签,yyy来自{{fromHere}}-{{here}}</div>`,
+						props: ['fromHere','here']
+					},
+					'yyy2': yyy2,
+					'parentcom': parentcom
+				}
+			});
+
+			var app2 = new Vue({
+				el: '#app2',
+				data: {}
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript" src="../assets/js/vue.js"></script>
+		<title>v-bind实例</title>
+	</head>
+	<body>
+		<h3>v-bind指令</h3>
+
+		<div id="app">
+			<a v-bind:href="link" target="_blank">我是a标签</a>
+			<div :class="'className'">绑定'className'</div>
+			<div :class="[classA,classB]">绑定定义的classA,classB</div>
+			<div :class="{className:isTrue}">绑定class的判断</div>
+			<div :class="[{className:isTrue},classB]">绑定class的判断和定义的classB</div>
+			<div :class="[isTrue?classA:classB]">三元表达式判断</div>
+			<div :style="styleObject">绑定style样式</div>
+		</div>
+
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app',
+				data: {
+					link: 'https://github.com/yoyoCoding',
+					classA: 'class-a',
+					classB: 'class-b',
+					isTrue: true,
+					styleObject: {
+						color: 'red',
+						fontSize: '13px'
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
